@@ -1,0 +1,46 @@
+/* 
+ * Filename: _mixins.scss
+ * Author: Elmar Beckmann
+ * Co-Authors: 
+ * Date Created: 05/08/2013
+ * ------
+ * Information: This file contains all custom mixins
+ * Notes:
+ */
+
+/**
+ * Breakpoint Mixin
+ *
+ * breakpoint mixin
+ * use @include breakpoint(small) { ... }
+ * or without this use @media #{$small} { ... }
+ * or without this use @media only screen and (min-width: 900px) { ... }
+ */
+@mixin breakpoint($point) {
+	@if $point == small {
+		@media only screen and (min-width: #{$small-screen}) { @content; }
+	}
+	@else if $point == medium {
+		@media only screen and (min-width: #{$medium-screen}) { @content; }
+	}
+	@else if $point == large {
+		@media only screen and (min-width: #{$large-screen}) { @content; }
+	}
+	@else {
+		@media only screen and (min-width: #{$point}) { @content; }
+	}
+}
+
+@mixin between-breakpoints($min, $max) {
+	@media (min-width: $min) and (max-width: $max) {
+		@content;
+	}
+}
+
+@mixin triangle_right ($height_top, $height_bot, $width, $color) {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: $height_top 0 $height_bot $width;
+	border-color: transparent transparent transparent $color;
+}
